@@ -1,36 +1,18 @@
-import { useEffect, useState } from "react";
-import Link, { LinkItem } from "./Link";
+import Link from "./Link";
 import MinkButton from "./MinkButton";
 import { copyToClipboard } from "../utils/copyToClipboard";
+import { useRecoilState } from "recoil";
+import { linksAtom } from "../recoil/atom/linksAtom";
 
-const linkss: LinkItem[] = [
-  { link: "https://github.com/rajenderK7", name: "Github" },
-  { link: "https://github.com/rajenderK7", name: "LinkedIn" },
-  { link: "https://github.com/rajenderK7", name: "Leetcode" },
-  { link: "https://github.com/rajenderK7", name: "Codeforces" },
-  { link: "https://github.com/rajenderK7", name: "YouTube" },
-];
-
-const fetchLinks = (setLinks: Function) => {
+export const fetchLinks = (setLinks: any) => {
   chrome.storage.sync.get(["links"], (res) => {
     setLinks(res.links);
-  });
-};
-
-const setDummy = () => {
-  chrome.storage.sync.clear();
-  chrome.storage.sync.set({ links: linkss }, () => {
-    console.log("saved");
+    console.log("menlo");
   });
 };
 
 const Links = () => {
-  // setDummy();
-  const [links, setLinks] = useState<LinkItem[]>([]);
-
-  useEffect(() => {
-    fetchLinks(setLinks);
-  }, []);
+  const [links, setLinks] = useRecoilState(linksAtom);
 
   const deleteLinkHandler = (name: string) => {
     const updatedLinks = links.filter((link) => link.name !== name);

@@ -1,17 +1,17 @@
-import { useState } from "react";
 import Header from "./components/Header";
 import Links from "./components/Links";
-import NewLink from "./components/NewLink";
+import NewLinkForm from "./components/NewLinkForm";
+import { useRecoilValue } from "recoil";
+import { showFormAtom } from "./recoil/atom/showFormAtom";
 
 export default function Popup(): JSX.Element {
-  const [showForm, setShowForm] = useState(false);
+  const showForm = useRecoilValue(showFormAtom);
 
   return (
     <div className="max-h-[200px]">
       <Header />
       <main className="m-2">
-        {/* Form for adding new link */}
-        {showForm && <NewLink />}
+        {showForm && <NewLinkForm />}
         <Links />
       </main>
     </div>
