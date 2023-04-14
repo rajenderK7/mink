@@ -12,6 +12,7 @@ const NewLinkForm = () => {
   const setShowForm = useSetRecoilState(showFormAtom);
 
   const onSubmitHandler = () => {
+    if (name === "" || link === "") return;
     const updatedLinks = [...links, { name, link }];
     chrome.storage.sync.set({ links: updatedLinks }, () => {
       fetchLinks(setLinks);
@@ -22,7 +23,7 @@ const NewLinkForm = () => {
   };
 
   return (
-    <div className="mb-2">
+    <form className="mb-2 border-b">
       <div>
         <label htmlFor="name" className="mb-1 text-sm text-gray-900">
           Name
@@ -51,10 +52,10 @@ const NewLinkForm = () => {
           onChange={(e) => setLink(e.target.value)}
         />
       </div>
-      <div className="mt-2">
+      <div className="my-2">
         <MinkButton title="Submit" onClick={onSubmitHandler} />
       </div>
-    </div>
+    </form>
   );
 };
 

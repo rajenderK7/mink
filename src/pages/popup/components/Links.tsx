@@ -30,9 +30,13 @@ const Links = () => {
   return (
     <>
       <div className="flex justify-between items-center my-1">
-        <h1 className="font-medium text-green-700">Click a link to copy</h1>
+        {links.length > 0 && (
+          <>
+            <h1 className="font-medium text-green-700">Click a link to copy</h1>
+            <MinkButton title="Copy all" onClick={copyAll} />
+          </>
+        )}
         {/* Button to copy all the links available */}
-        <MinkButton title="Copy all" onClick={copyAll} />
       </div>
       <div className="ml-1 my-2 text-sm font-sm max-h-[260px] bg-white scrollbar-thin scrollbar-thumb-[#4f06c4] overflow-y-scroll">
         {links.length > 0 &&
@@ -45,7 +49,9 @@ const Links = () => {
               />
             );
           })}
-        {links.length == 0 && <p>No items added yet. 😃</p>}
+        {links.length == 0 && (
+          <p className="mb-1 text-center">No items added yet. 😃</p>
+        )}
       </div>
     </>
   );

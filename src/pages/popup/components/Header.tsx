@@ -10,11 +10,14 @@ const Header = () => {
       <p>Mink here 👋</p>
       {showForm ? (
         <TiArrowSortedUp
-          className="text-white"
+          className="text-white hover:cursor-pointer"
           onClick={() => setShowForm(false)}
         />
       ) : (
-        <GoPlus className="text-white" onClick={() => setShowForm(true)} />
+        <GoPlus
+          className="text-white hover:cursor-pointer"
+          onClick={() => setShowForm(true)}
+        />
       )}
     </div>
   );
